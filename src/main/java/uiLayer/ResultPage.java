@@ -1,11 +1,18 @@
 package uiLayer;
 
+import core.Driver;
+import org.omg.CORBA.TIMEOUT;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ResultPage extends BasePage {
 
@@ -64,6 +71,8 @@ public class ResultPage extends BasePage {
         Assert.assertEquals(firstBtn.getAttribute("class"), "pgc pgcsel");
         Assert.assertEquals(secondBtn.getAttribute("class"), "pgc");
         nextPageLink.click();
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 5);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("#paging>div.dsi>div.pgc.pgcsel:nth-child(2)")));
         Assert.assertEquals(firstBtn.getAttribute("class"), "pgc");
         Assert.assertEquals(secondBtn.getAttribute("class"), "pgc pgcsel");
     }
